@@ -7,6 +7,7 @@ import { slateEditor } from "@payloadcms/richtext-slate";
 import { buildConfig } from "payload/config";
 
 import Users from "./collections/Users";
+import Accounts from "./collections/Accounts";
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
@@ -17,7 +18,7 @@ export default buildConfig({
   cors: [process.env.CORS_ORIGIN],
   csrf: [process.env.CORS_ORIGIN],
   editor: slateEditor({}),
-  collections: [Users],
+  collections: [Users, Accounts],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
