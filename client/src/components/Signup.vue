@@ -8,11 +8,17 @@ export default {
       username: ref(""),
       email: ref(""),
       password: ref(""),
+      confirmPassword: ref(""),
     };
   },
   methods: {
     async signup() {
       try {
+        if (this.password !== this.confirmPassword) {
+          console.log("Passwords do not match");
+          return;
+        }
+
         const req = await fetch("http://127.0.0.1:5000/api/accounts", {
           method: "POST",
           headers: {
@@ -71,6 +77,17 @@ export default {
                   type="password"
                   class="input max-w-full"
                   v-model="password" />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Confirm Password</label>
+              <div class="form-control">
+                <input
+                  placeholder="Type here"
+                  type="password"
+                  class="input max-w-full"
+                  v-model="confirmPassword" />
               </div>
             </div>
 
