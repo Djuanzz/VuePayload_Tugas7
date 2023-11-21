@@ -1,15 +1,17 @@
 <script>
+import { ref } from "vue";
 export default {
   name: "Dashboard",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      // msg: "Welcome to Your Vue.js App",
     };
   },
   methods: {
     async logout() {
       try {
-        const req = await fetch("http://127.0.0.1:5000/api/accounts/logout", {
+        const req = await fetch("http://localhost:5000/api/accounts/logout", {
+          credentials: "include",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -22,9 +24,11 @@ export default {
         console.log(err);
       }
     },
+
     async itsme() {
       try {
-        const req = await fetch("http://127.0.0.1:5000/api/accounts/me", {
+        const req = await fetch("http://localhost:5000/api/accounts/me", {
+          credentials: "include",
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -57,8 +61,21 @@ export default {
       </div>
 
       <div class="navbar-end">
-        <div class="form-control justify-between">
-          <button @click="itsme" class="btn btn-solid-error">Logout</button>
+        <div class="dropdown-container">
+          <div class="dropdown">
+            <div class="btn btn-gray flex cursor-pointer" tabindex="0">
+              <h1>Username</h1>
+              <i class="fa-regular fa-user ms-3"></i>
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-bottom-left">
+              <a class="dropdown-item text-sm">Profile</a>
+              <a tabindex="-1" class="dropdown-item text-sm"
+                >Account settings</a
+              >
+              <a tabindex="-1" class="dropdown-item text-sm">Subscriptions</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

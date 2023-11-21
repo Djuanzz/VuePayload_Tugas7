@@ -36,58 +36,64 @@ export default {
 </script>
 
 <template>
-  <form action="" v-on:submit.prevent="signup">
-    <div class="mx-auto flex w-full max-w-sm flex-col gap-6">
-      <div class="flex flex-col items-center">
-        <h1 class="text-3xl font-semibold">Sign Up</h1>
-      </div>
-      <div class="form-group">
-        <div class="form-field">
-          <label class="form-label">Username</label>
-          <input
-            placeholder="Type here"
-            type="text"
-            class="input max-w-full"
-            v-model="username" />
-        </div>
+  <div class="flex my-auto min-h-screen items-center">
+    <div class="container">
+      <form action="" v-on:submit.prevent="signup">
+        <div class="mx-auto flex w-full max-w-sm flex-col gap-6">
+          <div class="flex flex-col items-center">
+            <h1 class="text-3xl font-semibold">Sign Up</h1>
+          </div>
+          <div class="form-group">
+            <div class="form-field">
+              <label class="form-label">Username</label>
+              <input
+                placeholder="Type here"
+                type="text"
+                class="input max-w-full"
+                v-model="username" />
+            </div>
 
-        <div class="form-field">
-          <label class="form-label">Email address</label>
+            <div class="form-field">
+              <label class="form-label">Email address</label>
 
-          <input
-            placeholder="Type here"
-            type="email"
-            class="input max-w-full"
-            v-model="email" />
-        </div>
+              <input
+                placeholder="Type here"
+                type="email"
+                class="input max-w-full"
+                v-model="email" />
+            </div>
 
-        <div class="form-field">
-          <label class="form-label">Password</label>
-          <div class="form-control">
-            <input
-              placeholder="Type here"
-              type="password"
-              class="input max-w-full"
-              v-model="password" />
+            <div class="form-field">
+              <label class="form-label">Password</label>
+              <div class="form-control">
+                <input
+                  placeholder="Type here"
+                  type="password"
+                  class="input max-w-full"
+                  v-model="password" />
+              </div>
+            </div>
+
+            <div class="form-field pt-5">
+              <div class="form-control justify-between">
+                <button type="submit" class="btn btn-primary w-full">
+                  Sign up
+                </button>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <div class="form-control justify-center">
+                <a
+                  class="link link-underline-hover link-primary text-sm"
+                  href="/"
+                  >Have an account? Sign in.</a
+                >
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="form-field pt-5">
-          <div class="form-control justify-between">
-            <button type="submit" class="btn btn-primary w-full">
-              Sign up
-            </button>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="form-control justify-center">
-            <a class="link link-underline-hover link-primary text-sm" href="/"
-              >Have an account? Sign in.</a
-            >
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
-  </form>
+  </div>
 </template>

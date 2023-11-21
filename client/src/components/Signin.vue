@@ -1,5 +1,5 @@
 <script>
-import { ref } from "vue";
+import { ref, provide, inject } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -14,7 +14,8 @@ export default {
   methods: {
     async login() {
       try {
-        const req = await fetch("http://127.0.0.1:5000/api/accounts/login", {
+        const req = await fetch("http://localhost:5000/api/accounts/login", {
+          credentials: "include",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -26,22 +27,7 @@ export default {
         });
         const data = await req.json();
         console.log(data);
-        // if (req.ok) this.$router.push("/dashboard");
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    async itsme() {
-      try {
-        const req = await fetch("http://127.0.0.1:5000/api/accounts/me", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await req.json();
-        console.log(data);
+        if (req.ok) this.$router.push("/dashboard");
       } catch (err) {
         console.log(err);
       }
@@ -51,60 +37,54 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <form action="" v-on:submit.prevent="login">
-      <div class="mx-auto flex w-full max-w-sm flex-col gap-6">
-        <div class="flex flex-col items-center">
-          <h1 class="text-3xl font-semibold">Sign In</h1>
-        </div>
-        <div class="form-group">
-          <div class="form-field">
-            <label class="form-label">Email address</label>
-
-            <input
-              placeholder="Type here"
-              type="email"
-              class="input max-w-full"
-              v-model="email" />
+  <div class="flex my-auto min-h-screen items-center">
+    <div class="container">
+      <form action="" v-on:submit.prevent="login">
+        <div class="mx-auto flex w-full max-w-sm flex-col gap-6">
+          <div class="flex flex-col items-center">
+            <h1 class="text-3xl font-semibold">Sign In</h1>
           </div>
-          <div class="form-field">
-            <label class="form-label">Password</label>
-            <div class="form-control">
+          <div class="form-group">
+            <div class="form-field">
+              <label class="form-label">Email address</label>
+
               <input
                 placeholder="Type here"
-                type="password"
+                type="email"
                 class="input max-w-full"
-                v-model="password" />
+                v-model="email" />
             </div>
-          </div>
-
-          <div class="form-field pt-5">
-            <div class="form-control justify-between">
-              <button type="submit" class="btn btn-primary w-full">
-                Sign in
-              </button>
+            <div class="form-field">
+              <label class="form-label">Password</label>
+              <div class="form-control">
+                <input
+                  placeholder="Type here"
+                  type="password"
+                  class="input max-w-full"
+                  v-model="password" />
+              </div>
             </div>
-          </div>
 
-          <div class="form-field pt-5">
-            <div class="form-control justify-between">
-              <button @click="itsme" class="btn btn-warning w-full">
-                Itsme
-              </button>
+            <div class="form-field pt-5">
+              <div class="form-control justify-between">
+                <button type="submit" class="btn btn-primary w-full">
+                  Sign in
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div class="form-field">
-            <div class="form-control justify-center">
-              <a
-                class="link link-underline-hover link-primary text-sm"
-                href="/signup"
-                >Don't have an account yet? Sign up.</a
-              >
+            <div class="form-field">
+              <div class="form-control justify-center">
+                <a
+                  class="link link-underline-hover link-primary text-sm"
+                  href="/signup"
+                  >Don't have an account yet? Sign up.</a
+                >
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </template>
