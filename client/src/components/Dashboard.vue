@@ -68,12 +68,17 @@ export default {
               <i class="fa-regular fa-user ms-3"></i>
             </div>
 
-            <div class="dropdown-menu dropdown-menu-bottom-left">
+            <div class="dropdown-menu dropdown-menu-bottom-left mt-3">
               <a class="dropdown-item text-sm">Profile</a>
               <a tabindex="-1" class="dropdown-item text-sm"
                 >Account settings</a
               >
-              <a tabindex="-1" class="dropdown-item text-sm">Subscriptions</a>
+              <button
+                tabindex="-1"
+                class="font-bold dropdown-item text-sm text-red-500"
+                @click="logout">
+                Logout
+              </button>
             </div>
           </div>
         </div>
