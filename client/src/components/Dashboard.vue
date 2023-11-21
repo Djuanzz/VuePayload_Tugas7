@@ -1,10 +1,13 @@
 <script>
 import { ref } from "vue";
+import Notes from "./Notes.vue";
+
 export default {
   name: "Dashboard",
   data() {
     return {
       // msg: "Welcome to Your Vue.js App",
+      username: ref(""),
     };
   },
   methods: {
@@ -24,7 +27,6 @@ export default {
         console.log(err);
       }
     },
-
     async itsme() {
       try {
         const req = await fetch("http://localhost:5000/api/accounts/me", {
@@ -35,12 +37,17 @@ export default {
           },
         });
         const data = await req.json();
-        console.log(data);
+        if (data.user == null) this.$router.push("/");
+        if (req.ok) this.username = data.user.username;
       } catch (err) {
         console.log(err);
       }
     },
   },
+  mounted() {
+    this.itsme();
+  },
+  components: { Notes },
 };
 </script>
 
@@ -64,7 +71,7 @@ export default {
         <div class="dropdown-container">
           <div class="dropdown">
             <div class="btn btn-gray flex cursor-pointer" tabindex="0">
-              <h1>Username</h1>
+              <h1>{{ username }}</h1>
               <i class="fa-regular fa-user ms-3"></i>
             </div>
 
@@ -84,5 +91,9 @@ export default {
         </div>
       </div>
     </div>
+
+    <section class="flex flex-wrap">
+      <Notes />
+    </section>
   </div>
 </template>
